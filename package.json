@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "prepublish": "coffee -o lib -c src/*.litcoffee"
-  }
+  },
   "author": "Shaun Cutts",
   "license": "MIT",
   "bugs": {
