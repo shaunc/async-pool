@@ -4,7 +4,7 @@
   "description": "asynchronous event pool based on bluebird",
   "main": "lib/async-pool.js",
   "scripts": {
-    "test": "mocha"
+    "prepublish": "coffee -o lib -c src/*.litcoffee"
   },
   "repository": {
     "type": "git",
@@ -15,13 +15,13 @@
     "bluebird",
     "pool"
   ],
-  "scripts": {
-    "prepublish": "coffee -o lib -c src/*.litcoffee"
-  },
   "author": "Shaun Cutts",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shaunc/async-pool/issues"
   },
-  "homepage": "https://github.com/shaunc/async-pool"
+  "homepage": "https://github.com/shaunc/async-pool",
+  "dependencies": {
+    "bluebird": "^2.9.14"
+  }
 }
