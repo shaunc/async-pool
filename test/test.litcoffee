@@ -8,7 +8,7 @@ Test AsyncPool
     # support use of tests by derived
     Pool = global.Pool ? AsyncPool
 
-    describe 'base ' + Pool.constructor.name, ->
+    describe 'base ' + Pool.name, ->
 
       it 'throws an error if asked for resource from non-existent pool', ->
         pool = new Pool()
@@ -31,6 +31,15 @@ Test AsyncPool
           results.sort()
           results.should.eql [
             [1,2], [2,1], [3,2], [4, 1], [5, 2]]
+
+      it 'will block if too many requests ask for simultaneous access', ->
+        pool = new Pool([1,2])
+        promise = Promise.using pool.use(), pool.use(), pool.use(), (a,b,c)->
+        promise.timeout(20)
+        .then ->
+          should.not.exist 'failed to block...'
+        .catch (err)->
+          err.message.should.equal 'operation timed out'
 
       describe 'can be closed:', ->
         pool = null
