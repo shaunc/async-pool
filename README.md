@@ -3,7 +3,7 @@ asynchronous resource pool using bluebird
 
 ## Installation
 
-    npm install git+https://git@github.com/shaunc/async-pool.git
+    npm install async-pool
   
 ## Usage
 
@@ -30,3 +30,4 @@ Produces:
     baz 1 0
     bar 1 0
       
+Also see [async-proxy-pool](https://github.com/shaunc/async-proxy-pool) which extends async pool, supporting parallel as well as serial access.
