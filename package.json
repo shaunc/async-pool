@@ -1,6 +1,6 @@
 {
   "name": "async-pool",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "asynchronous event pool based on bluebird",
   "main": "lib/async-pool.js",
   "scripts": {
