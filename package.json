@@ -23,5 +23,10 @@
   "homepage": "https://github.com/shaunc/async-pool",
   "dependencies": {
     "bluebird": "^2.9.14"
+  },
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "coffee-script": "^1.9.1",
+    "mocha": "^2.2.1"
   }
 }

@@ -13,6 +13,7 @@ Build a pool. Resources should be an array of resources.
 
       constructor: (resources)->
         @resources = resources
+        @nresources = resources?.length ? 0
         @waiting = []
 
 Get a resource when one comes available. Use with `Promise.using`
@@ -21,8 +22,8 @@ Throws a syncrhonous error if there is no pool.
 
       use: ()->
         self = this
-        if !@resources?
-          throw new Error('AsyncPool is closed.')
+        if !@resources? or (@nresources) == 0
+          throw new Error('AsyncPool is closed or without resources.')
         return new Promise( (res)->
           resource = self.resources.pop()
           if resource?
@@ -30,7 +31,6 @@ Throws a syncrhonous error if there is no pool.
           self.waiting.push(res)
         ).disposer (resource)->
           waiter = self.waiting.pop()
-          console.log('-- client returned; waiter', waiter?.name ? waiter )
           if waiter?
             waiter(resource)
           else
