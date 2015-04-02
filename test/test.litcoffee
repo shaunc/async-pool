@@ -5,7 +5,10 @@ Test AsyncPool
     Promise = require 'bluebird'
     AsyncPool = require '../index.js'
 
-    describe 'AsyncPool', ->
+    # support use of tests by derived
+    Pool = global.Pool ? AsyncPool
+
+    describe 'base ' + Pool.constructor.name, ->
 
       it 'throws an error if asked for resource from non-existent pool', ->
         pool = new AsyncPool()
