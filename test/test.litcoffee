@@ -11,19 +11,19 @@ Test AsyncPool
     describe 'base ' + Pool.constructor.name, ->
 
       it 'throws an error if asked for resource from non-existent pool', ->
-        pool = new AsyncPool()
+        pool = new Pool()
         should.throw ->
           Promise.using pool.use()
         , 'AsyncPool is closed or without resources.'
 
       it 'throws an error if asked for resource from an empty pool', ->
-        pool = new AsyncPool([])
+        pool = new Pool([])
         should.throw ->
           Promise.using pool.use()
         , 'AsyncPool is closed or without resources.'
 
       it 'serializes access to resources', ->
-        pool = new AsyncPool([1,2])
+        pool = new Pool([1,2])
         Promise.map [1,2,3,4,5], (i)->
           Promise.using pool.use(), (j)->
             return [i, j]
@@ -35,7 +35,7 @@ Test AsyncPool
       describe 'can be closed:', ->
         pool = null
         beforeEach ->
-          pool = new AsyncPool([1, 2])
+          pool = new Pool([1, 2])
 
         it 'reports not closed if not closed.', ->
           pool.isClosed().should.equal no

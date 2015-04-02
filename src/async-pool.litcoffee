@@ -24,13 +24,7 @@ any waiting close to reject if used when waiting to close.
 
       use: ()->
         self = this
-        if @willClose?
-          @willClose?.reject?(
-            new Error('AsyncPool used while closing.'))
-        if !@resources? or (@nresources) == 0 or @willClose?
-          @willClose = null
-          @resources = null
-          throw new Error('AsyncPool is closed or without resources.')
+        @_checkCloseOnUse()
         return new Promise( (res)->
           resource = self.resources.pop()
           if resource?
@@ -38,7 +32,7 @@ any waiting close to reject if used when waiting to close.
           self.waiting.push(res)
         ).disposer (resource)->
           if self.isClosed()
-            return 
+            return
           waiter = self.waiting.pop()
           if waiter?
             waiter(resource)
@@ -96,6 +90,17 @@ Returns true if pool closing or is closed.
 
       isClosed: ()->
         return !@resources? or @willClose?
+
+Check if closed when used.
+
+      _checkCloseOnUse: ()->
+        if @willClose?
+          @willClose?.reject?(
+            new Error('AsyncPool used while closing.'))
+        if !@resources? or (@nresources) == 0 or @willClose?
+          @willClose = null
+          @resources = null
+          throw new Error('AsyncPool is closed or without resources.')
 
 
     module.exports = AsyncPool
