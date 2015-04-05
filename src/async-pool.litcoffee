@@ -6,6 +6,8 @@ users use and then return them so that no resource is used
 by more than one user at the same time.
 
     Promise = require 'bluebird'
+    Logger = require 'logger-facade-nodejs'
+    log = Logger.getLogger('async-pool')
 
     class AsyncPool
 

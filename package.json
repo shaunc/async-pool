@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/shaunc/async-pool",
   "dependencies": {
-    "bluebird": "^2.9.14"
+    "bluebird": "^2.9.14",
+    "logger-facade-nodejs": "0.0.3"
   },
   "devDependencies": {
     "chai": "^2.2.0",
